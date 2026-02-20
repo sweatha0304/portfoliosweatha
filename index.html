@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sweatha K | Portfolio</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: #f5f7fa;
+    color: #222;
+    overflow-x: hidden;
+}
+
+/* Canvas Background Animation */
+#animationCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    opacity: 0.08; /* watermark transparency */
+}
+
+/* Overlay to improve readability */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(255,255,255,0.85);
+    z-index: -1;
+}
+
+/* Content Styling */
+.container {
+    width: 85%;
+    max-width: 1000px;
+    margin: auto;
+    padding: 80px 0;
+}
+
+section {
+    margin-bottom: 80px;
+}
+
+h1 {
+    font-size: 42px;
+    color: #0d47a1;
+}
+
+h2 {
+    font-size: 26px;
+    margin-bottom: 20px;
+    color: #1565c0;
+    border-bottom: 2px solid #1565c0;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+p, li {
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+ul {
+    margin-left: 20px;
+}
+
+.header-info {
+    margin-top: 15px;
+    font-size: 18px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+footer {
+    text-align: center;
+    padding: 40px;
+    font-size: 16px;
+    color: #555;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="animationCanvas"></canvas>
+<div class="overlay"></div>
+
+<div class="container">
+
+<section>
+    <h1>Sweatha K</h1>
+    <div class="header-info">
+        <p>3rd Year B.E. Electronics & Communication Engineering</p>
+        <p>Government College of Engineering, Tirunelveli</p>
+        <p>Email: sweathakannan10@gmail.com | Phone: 9876543210</p>
+    </div>
+</section>
+
+<section>
+    <h2>Career Objective</h2>
+    <div class="card">
+        <p>
+        Dedicated and detail-oriented Electronics & Communication Engineering student with a CGPA of 7.90.
+        Seeking opportunities in core electronics, embedded systems, or communication domains.
+        Enthusiastic about applying technical knowledge through internships and projects, while aiming for
+        growth in government and PSU sectors.
+        </p>
+    </div>
+</section>
+
+<section>
+    <h2>Education</h2>
+    <div class="card">
+        <p><strong>B.E. Electronics & Communication Engineering</strong></p>
+        <p>Government College of Engineering, Tirunelveli | 2023-2027 (Expected)</p>
+        <p>CGPA: 7.90</p>
+        <br>
+        <p><strong>Higher Secondary (12th Grade)</strong></p>
+        <p>Percentage: 88.6%</p>
+    </div>
+</section>
+
+<section>
+    <h2>Internship Experience</h2>
+    <div class="card">
+        <p><strong>Akash Power Tech, Coimbatore - Intern</strong></p>
+        <ul>
+            <li>Gained hands-on exposure to electronics and power systems</li>
+            <li>Assisted in practical implementation of circuits and systems</li>
+            <li>Developed technical understanding of industrial electronics processes</li>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h2>Technical Skills</h2>
+    <div class="card">
+        <ul>
+            <li>Circuit Analysis & Design</li>
+            <li>Communication Systems</li>
+            <li>Embedded Systems (Basic)</li>
+            <li>MATLAB, C Programming</li>
+            <li>Hardware Troubleshooting</li>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h2>Soft Skills</h2>
+    <div class="card">
+        <ul>
+            <li>Analytical Thinking & Problem Solving</li>
+            <li>Communication & Teamwork</li>
+            <li>Time Management & Adaptability</li>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h2>Career Goals</h2>
+    <div class="card">
+        <p><strong>Short-term:</strong> Gain experience in core electronics, hardware, or communication roles</p>
+        <br>
+        <p><strong>Long-term:</strong> Prepare for GATE & secure a position in PSU or government organizations</p>
+    </div>
+</section>
+
+<section>
+    <h2>Contact</h2>
+    <div class="card">
+        <p>Email: sweathakannan10@gmail.com</p>
+        <p>Phone: 9876543210</p>
+    </div>
+</section>
+
+<footer>
+    © 2026 Sweatha K | Electronics & Communication Engineering Portfolio
+</footer>
+
+</div>
+
+<script>
+const canvas = document.getElementById("animationCanvas");
+const context = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const frameCount = 240;
+const images = [];
+const imageSeq = {
+    frame: 0
+};
+
+// Load Images
+for (let i = 1; i <= frameCount; i++) {
+    const img = new Image();
+    img.src = `frames/ezgif-frame-${String(i).padStart(3, '0')}.jpg`;
+    images.push(img);
+}
+
+function render() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(images[imageSeq.frame], 0, 0, canvas.width, canvas.height);
+}
+
+window.addEventListener("scroll", () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollFraction = scrollTop / maxScrollTop;
+    const frameIndex = Math.min(
+        frameCount - 1,
+        Math.floor(scrollFraction * frameCount)
+    );
+    imageSeq.frame = frameIndex;
+    render();
+});
+
+images[0].onload = render;
+
+window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    render();
+});
+</script>
+
+</body>
+</html>
